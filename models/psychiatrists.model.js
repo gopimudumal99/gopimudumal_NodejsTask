@@ -1,4 +1,5 @@
 const mongoose = require("mongoose")
+const jwt = require("jsonwebtoken");
 
 const psychiartistSchema = new mongoose.Schema({
     firstName:{
@@ -9,7 +10,7 @@ const psychiartistSchema = new mongoose.Schema({
     lastName:{
         type:String,
         required:[true,"Please Enter Your Last Name"],
-        maxlength:[20,"Name cannot exceede 20 charecters"]
+        maxlength:[20,"Name cannot exceede 20 charecters"],
     },
     hospitalName:{
         type:String,
@@ -24,6 +25,9 @@ const psychiartistSchema = new mongoose.Schema({
     state:{
         type:String
     }
+},{
+    versionKey:false,
+    timestamps:true
 })
 
 

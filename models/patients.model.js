@@ -2,12 +2,6 @@ const mongoose = require("mongoose");
 const validator = require("validator")
 
 
-var validatePhone = function(phoneNo) {
-    var re = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-    return re.test(phoneNo)
-};
-
-
 const patientSchema = new mongoose.Schema({
     name:{
         type:String,
@@ -22,7 +16,7 @@ const patientSchema = new mongoose.Schema({
     password:{
         type:String,
         required:[true,"Please Enter your password"],
-        validate:[validator.isStrongPassword(this.password,[{ minLength: 8, maxLength:15, minLowercase: 1, minUppercase: 1, minNumbers: 1}]),"password is not storng"]
+        validate:[checkPassword,"password is not storng"]
     },
     address:{
         type:String,
@@ -30,10 +24,9 @@ const patientSchema = new mongoose.Schema({
         minlength:[10,"Name should be atleast 10 charecters"],
     },
     phoneNo:{
-        type:Number,
+        type:String,
         required:[true,"Please enter phoneNo with country code"],
-        validate:[validatePhone,'Please fill valid phone number'],
-        match:[/^\+[1-9]{1}[0-9]{3,14}$/,`Please fill valid phoneNo: example: +(countryCode)(mobileno)`]
+        match:[/^[1-9]{1}[0-9]{11,11}$/,"Please fill valid phoneNo: example: +(countryCode)(mobileno)"],
     },
     photo:{
         type:String,
@@ -44,6 +37,9 @@ const patientSchema = new mongoose.Schema({
         ref:"Psychiatrist",
         required:true
     }
+},{
+    versionKey:false,
+    timestamps:true
 })
 
 function checkPassword(str){
