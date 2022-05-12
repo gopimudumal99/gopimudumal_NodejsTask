@@ -16,7 +16,7 @@ const patientSchema = new mongoose.Schema({
     password:{
         type:String,
         required:[true,"Please Enter your password"],
-        validate:[checkPassword,"password is not storng"]
+        validate:[checkPassword,"password should contain at least 1 uppercase,1 lowercase,numbers in it"]
     },
     address:{
         type:String,
