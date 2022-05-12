@@ -26,4 +26,12 @@ const psychiartistSchema = new mongoose.Schema({
     }
 })
 
+
+//JWT TOKEN
+psychiartistSchema.methods.getJWTToken = function () {
+    return jwt.sign({ id: this._id }, process.env.JWT_SECRET, {
+      expiresIn: process.env.JWT_EXPIRESIN,
+    });
+  };
+
 module.exports= mongoose.model("Psychiatrist",psychiartistSchema)

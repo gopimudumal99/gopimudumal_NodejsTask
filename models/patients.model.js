@@ -38,6 +38,11 @@ const patientSchema = new mongoose.Schema({
     photo:{
         type:String,
         required:[true,"Please Provide your photo"]
+    },
+    psychiatrist:{
+        type:mongoose.Schema.ObjectId,
+        ref:"Psychiatrist",
+        required:true
     }
 })
 
