@@ -9,9 +9,8 @@ app.use(cookieParser())
 //Routes Import
 const psychiatrist = require("./routes/psychiatristRoute")
 const patient = require("./routes/patientRoute")
-const hospital = require('./routes/hospitalRoute')
 
-app.use("/api/v1",hospital)
+
 app.use("/api/v1",psychiatrist)
 app.use("/api/v1",patient)
 
