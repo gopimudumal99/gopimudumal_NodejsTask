@@ -14,8 +14,16 @@ exports.loginPsychiatrist = catchAsyncErrors(async (req, res, next) => {
     const psychiatrist = await Psychiartist.findOne({ firstName })
   
     if (!psychiatrist) {
-      return next(new ErrorHander("there is no psychiatrist register with this name", 401));
+      return next(new ErrorHandler("there is no psychiatrist register with this name", 401));
     }
 
     sendToken(psychiatrist, 200, res);
   });
+
+exports.getAllSychiatrist = catchAsyncErrors(async(req,res)=>{
+    const psychiartists = await Psychiartist.find();
+    res.status(201).json({
+        success:true,
+        psychiartists,
+    })
+}) 

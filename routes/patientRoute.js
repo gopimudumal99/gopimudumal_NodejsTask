@@ -1,10 +1,12 @@
 const express = require("express")
 const router = express.Router()
-const {createPatient,updatePatient,getAllPatient} = require("../controllers/patient.controller")
+const {createPatient,updatePatient,getSinglePsychiatristPatient,getInformation} = require("../controllers/patient.controller")
 
 const {isAuthenticatedPsychatrist} = require("../middlewares/auth")
 
-router.route("/patients").get(isAuthenticatedPsychatrist,getAllPatient)
+router.route("/info").get(getInformation)
+
+router.route("/psychiatrists/:id").get(getSinglePsychiatristPatient)
 
 router.route("/patient/new").post(isAuthenticatedPsychatrist,createPatient)
 

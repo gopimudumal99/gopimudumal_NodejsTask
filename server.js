@@ -18,8 +18,8 @@ dotenv.config({path:"configs/config.env"})
 connectDatabase()
 
 
-//middleware error Handler
-app.use(errorHandler)
+
+
 
 const server = app.listen(process.env.PORT,()=>{
     console.log(`Listing on port http://localhost:${process.env.PORT}`)

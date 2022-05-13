@@ -1,11 +1,11 @@
 const Patient = require("../models/patients.model")
 const ErrorHandler = require("../utils/errorHandler")
 const catchAsyncErrors = require("../middlewares/catchAsyncErrors")
+const Psychiatrists = require("../models/psychiatrists.model")
 
 //creating patient
 exports.createPatient = catchAsyncErrors(async(req,res,next)=>{
     req.body.psychiatrist = req.psychiatrist.id
-
     const patient = await Patient.create(req.body)
     res.status(201).json({
         success:true,
@@ -13,16 +13,27 @@ exports.createPatient = catchAsyncErrors(async(req,res,next)=>{
     })
 })
 
-//get all patient
-exports.getAllPatient = catchAsyncErrors(async(req,res,next)=>{
-    const patientCount = await Patient.countDocuments()
-    const patients = await Patient.find()
-    res.status(201).json({
+//get  patient for one psychiatrist
+exports.getSinglePsychiatristPatient = catchAsyncErrors(async(req,res,next)=>{
+    const a = req.params.id
+    const patients = await Patient.find({psychiatrist:a})
+    const count = await Patient.count({psychiatrist:a})
+    res.status(200).json({
         success:true,
         patients,
-        patientCount
+        count,
     })
 }) 
+
+
+//get count:patients and pychiartist and hospital
+exports.getInformation = catchAsyncErrors(async(req,res,next)=>{
+   res.json({
+    "issue":"not getting this"
+   })
+})
+
+
 
 //get update Patient
 exports.updatePatient = catchAsyncErrors(async(req,res,next)=>{
